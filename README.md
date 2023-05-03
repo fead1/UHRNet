@@ -3,7 +3,7 @@ UHRNet CNN implementation (pytorch)
 ## Introduction
 In this paper, we propose a deep learning-based method for accurate 3D reconstruction for a single fringe-pattern. We use unet's encoding and decoding structure as baackbone and design Multi-level Conv block and Fusion block to enhance the ability of feature extraction and detail reconstruction of the network. Wang et al. 's dataset was used as our training set validation set and test set. The link to the data set is left at the end. The test set contains 153 patterns, and our method's average RMSE is only 0.443(mm) and an average SSIM is 0.9978 on the test set.
 
-For more details, please refer to our paper:
+For more details, please refer to our paper:https://arxiv.org/abs/2304.14503
 
 **Frame of UHRNet**
  
@@ -21,7 +21,7 @@ For more details, please refer to our paper:
 |---|---|---|---|---|
 |our method|0.433|0.9978|30.33|0.0224|
 |hNet|1.330|0.9767|8.63|0.0093|
-|RESUNet||||
+|ResUNet|0.685|0.9931|32.44|0.0105|
 
 -   **3D height map reconstructed by our method**
 
