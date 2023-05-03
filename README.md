@@ -8,7 +8,7 @@ For more details, please refer to our paper:https://arxiv.org/abs/2304.14503
 **Frame of UHRNet**
  
 - UHRNet structure
-[UHRNet]()
+！[UHRNet](https://raw.githubusercontent.com/fead1/UHRNet/main/Network%20structure/High-resolution%20Fusion%20Block.png)
 - Muti-Level Conv Block structure
 [Muti-Level Conv Block]()
 - Fusion Block structrure
