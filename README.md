@@ -41,4 +41,24 @@ For more details, please refer to our paper:https://arxiv.org/abs/2304.14503
 
 [demo]()
 
+## Our Environment
+
+- Python 3.9.7
+- pytorch 1.5.0
+- CUDA 11.3
+- Numpy 1.23.3
+## Pretrained model and Dataset
+- Pretrained model(UHRNet):
+Link：https://pan.baidu.com/s/1QS5ftR2Ww2n6enVeVlf-yQ 
+Password：1234
+According the link given above to download the weights to the UHRNet folder to run the pre-trained model
+- Dataset:
+[Single-input dual-output 3D shape reconstruction (figshare.com)](https://figshare.com/s/c09f17ba357d040331e4)[1]
+This dataset contains 1532 fringe-patterns and corresponding 3D height map, which are divided into training set, test set and validation set according to the ratio of 80%, 10% and 10%
+
+## Citation
+ [1] A. Nguyen, O. Rees and Z. Wang, "Learning-based 3D imaging from single structured-light image,"  _Graphical Models,_ vol. 126, 2023.
+
+
+
 
