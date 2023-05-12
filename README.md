@@ -8,9 +8,9 @@ For more details, please refer to our paper:https://arxiv.org/abs/2304.14503
 **Frame of UHRNet**
  
 - UHRNet structure
-![UHRNet](https://raw.githubusercontent.com/fead1/UHRNet/main/Network%20structure/UHRNet%20structure.png)
+![UHRNet](https://github.com/fead1/UHRNet/blob/main/Network%20structure/UHRNet%20Structure.png)
 - Muti-Level Conv Block structure
-![Muti-Level Conv Block](https://raw.githubusercontent.com/fead1/UHRNet/main/Network%20structure/Muti-Level%20Conv%20Block.png)
+![Multi-Level Conv Block](https://raw.githubusercontent.com/fead1/UHRNet/main/Network%20structure/Muti-Level%20Conv%20Block.png)
 - High-resolution Fusion Block structrure
 ![High-resolution Fusion Block](https://raw.githubusercontent.com/fead1/UHRNet/main/Network%20structure/High-resolution%20Fusion%20Block.png)
 
