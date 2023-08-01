@@ -4,14 +4,13 @@ from math import exp
 import numpy as np
 
 
-# 计算一维的高斯分布向量
+
 def gaussian(window_size, sigma):
     gauss = torch.Tensor([exp(-(x - window_size // 2) ** 2 / float(2 * sigma ** 2)) for x in range(window_size)])
     return gauss / gauss.sum()
 
 
-# 创建高斯核，通过两个一维高斯分布向量进行矩阵乘法得到
-# 可以设定channel参数拓展为3通道
+
 def create_window(window_size, channel=1):
     _1D_window = gaussian(window_size, 1.5).unsqueeze(1)
     _2D_window = _1D_window.mm(_1D_window.t()).float().unsqueeze(0).unsqueeze(0)
@@ -19,10 +18,7 @@ def create_window(window_size, channel=1):
     return window
 
 
-# 计算SSIM
-# 直接使用SSIM的公式，但是在计算均值时，不是直接求像素平均值，而是采用归一化的高斯核卷积来代替。
-# 在计算方差和协方差时用到了公式Var(X)=E[X^2]-E[X]^2, cov(X,Y)=E[XY]-E[X]E[Y].
-# 正如前面提到的，上面求期望的操作采用高斯核卷积代替。
+
 def ssim(img1, img2, window_size=11, window=None, size_average=True, full=False, val_range=None):
     # Value range can be different from 255. Other common ranges are 1 (sigmoid) and 2 (tanh).
     if val_range is None:
