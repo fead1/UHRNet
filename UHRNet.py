@@ -10,51 +10,7 @@ import torchvision.datasets
 import math
 from torchsummary import summary
 
-class third_branch(nn.Module):
-    def __init__(self, up_scale, y):
-        super(third_branch, self).__init__()
-        if up_scale > 1:
-            self.conv = nn.Sequential(
-                nn.Conv2d(y, 1, kernel_size=1,stride=1,padding=0),
-                nn.LeakyReLU(0.3,inplace=True),
-                nn.ConvTranspose2d(1, 1, kernel_size=2*up_scale, stride=up_scale, padding=up_scale//2),
-            )
-        else:
-            self.conv = nn.Sequential(
-                nn.Conv2d(y, 1, kernel_size=1, stride=1),
-                nn.LeakyReLU(0.3)
-            )
-    def forward(self, input):
-        output = self.conv(input)
-        return output
 
-class ChannelAttention(nn.Module):
-    def __init__(self, in_planes, ratio=4):
-        super(ChannelAttention, self).__init__()
-        self.avg_pool = nn.AdaptiveAvgPool2d(1)
-        self.max_pool = nn.AdaptiveMaxPool2d(1)
-
-        self.fc1   = nn.Conv2d(in_channels=in_planes, out_channels=in_planes // ratio, kernel_size=1, bias=False)
-        self.relu1 = nn.ReLU()
-        self.fc2   = nn.Conv2d(in_channels=in_planes // ratio, out_channels=in_planes, kernel_size=1, bias=False)
-
-        self.sigmoid = nn.Sigmoid()
-
-    def forward(self, x):
-        avg_out = self.fc2(self.relu1(self.fc1(self.avg_pool(x))))
-        max_out = self.fc2(self.relu1(self.fc1(self.max_pool(x))))
-        out = avg_out + max_out
-        return self.sigmoid(out) * x
-
-class Branch0(nn.Module):
-    def __init__(self, in_ch, out_ch):
-        super(Branch0, self).__init__()
-        self.conv0 = nn.Conv2d(in_ch, out_ch, kernel_size=1, padding=0)
-        self.bt0 = nn.BatchNorm2d(out_ch)
-    def forward(self, x):
-        x0 = self.conv0(x)
-        x0 = self.bt0(x0)
-        return x0
 
 ' Branch1 block '
 class Branch1(nn.Module):
@@ -237,11 +193,7 @@ class UHRNet(nn.Module):
 
         self.cov3 = cbl(384, 256)
         self.cov3_ = cbl(512, 256)
-        # self.branch2 = third_branch(4, 256)
-        # self.branch3 = third_branch(2, 128)
-        # self.branch4 = third_branch(1, 64)
-        # self.cov = nn.Conv2d(1, 1, stride=1, kernel_size=1, padding=0)
-        # self.final = nn.Conv2d(5, 1, kernel_size=1)
+       
     def forward(self, x):
         x1, x1_ = self.down1(x)
 
@@ -250,7 +202,7 @@ class UHRNet(nn.Module):
         x4, x4_ = self.down4(x3)
         x4 = self.drop(x4)
         x5  = self.res(x4)
-        # x5 = self.chan(x5)
+
 
         x6 = self.up1(x5, x4_)
         x3__ = cat((self.down0__(x1_),self.down1_(x2_),self.up3___(x4_)),dim=1)
@@ -271,7 +223,7 @@ class UHRNet(nn.Module):
         x9 = self.up4(x8, x1__)
 
         x10 = self.outc(x9)
-        # out = torch.cat([out1, out2, out3, out4, x10], 1)
+      
         return x10
 
 model = UHRNet()
