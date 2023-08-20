@@ -11,7 +11,15 @@ import math
 from torchsummary import summary
 
 
-
+class Branch0(nn.Module):
+    def __init__(self, in_ch, out_ch):
+        super(Branch0, self).__init__()
+        self.conv0 = nn.Conv2d(in_ch, out_ch, kernel_size=1, padding=0)
+        self.bt0 = nn.BatchNorm2d(out_ch)
+    def forward(self, x):
+        x0 = self.conv0(x)
+        x0 = self.bt0(x0)
+        return x0
 ' Branch1 block '
 class Branch1(nn.Module):
     def __init__(self, in_ch, out_ch):
@@ -167,7 +175,6 @@ class UHRNet(nn.Module):
         self.down3 = DownB(128, 256)
         self.down4 = DownB(256, 512)
         self.res = ResB(512, 1024)
-        # self.chan = ChannelAttention(1024)
         self.up1 = UpB(1024, 512)
         self.up2 = UpB(512, 256)
         self.up3 = UpB(256, 128)
